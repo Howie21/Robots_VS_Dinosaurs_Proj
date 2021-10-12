@@ -1,5 +1,6 @@
 import random
 
+from weapon import Weapon
 
 
 class Robot:
@@ -8,14 +9,6 @@ class Robot:
         self.health = Health
         self.weapon = Weapon()
         self.weapon_damage = random.randint(15, 25)
+        self.power_level = Health*1.5
 
 
-arsenal_of_weapons = [
-    'Lazer Sword', 
-    'Mecha Chainsaw', 
-    'Rocket Pod', 
-    ]
-
-class Weapon:
-    def __init__(self):
-        self.name = random.choice(list(arsenal_of_weapons))

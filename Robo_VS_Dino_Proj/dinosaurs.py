@@ -7,3 +7,4 @@ class Dinosaur:
         self.name = name
         self.health = health
         self.attack_power = random.randint(15, 25)
+        self.energy = health*1.5
