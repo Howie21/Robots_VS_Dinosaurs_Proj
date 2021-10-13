@@ -9,6 +9,6 @@ class Robot:
         self.health = Health
         self.weapon = Weapon()
         self.weapon_damage = random.randint(15, 25)
-        self.power_level = Health*1.5
+        self.power_level = Health / 2
 
 

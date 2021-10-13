@@ -83,9 +83,9 @@ class Battlefield:
     def display_winner(self, winner, loser):
         for dino in self.dino_herd.herd_dino:
             if loser == dino:
-                self.dino_herd.remove[loser]
-                print(f'{winner.name} beat {loser.name} using {winner.weapon} ')
+                self.dino_herd.herd_dino.remove(loser)
+                print(f'{winner.name} beat {loser.name} using {winner.weapon.name} ')
         for robot in self.robot_group.fleet_bots:
             if loser == robot:
-                self.robot_group.remove[loser]
+                self.robot_group.fleet_bots.remove(loser)
                 print(f'{winner.name} beat {loser.name} ')
