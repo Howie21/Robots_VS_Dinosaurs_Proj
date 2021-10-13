@@ -31,33 +31,49 @@ class Battlefield:
     def battle(self):
         print(f'\nAND SO THE BATTLE BEGINS!')
 
-        
-
     def dino_attack(self, dino, robot):
         attacking_dino = dino
         defending_robot = robot
         dino_attacks = ['Bite', 'Thrash', 'Ram', 'Neck Slap']
         if defending_robot.health > 0 and attacking_dino.energy >= 10:
             dino_attack = random.choice(dino_attacks)
-            print(f'{attacking_dino.name} attacks {defending_robot.name} for {attacking_dino.attack_power} Damage using {dino_attack} ')
+            print(f'{attacking_dino.name} attacks {defending_robot.name} for {str(attacking_dino.attack_power)} Damage using {dino_attack} ')
             defending_robot.health = defending_robot.health - (attacking_dino.attack_power / 2)
             attacking_dino.energy = attacking_dino.energy - 10
             defending_robot.power_level += 10
             if defending_robot.health <= 0:
                 self.display_winner(dino, robot)
+            elif defending_robot.health > 0:
+                self.robo_attack(defending_robot, attacking_dino)
         elif defending_robot.health > 0 and attacking_dino.energy < 10:
             print(f'{attacking_dino.name} only has {attacking_dino.energy} right now. They will miss this turn. ')
             attacking_dino.energy += 10
 
+    def robo_attack(self, robot, dino):
+        attacking_robot = robot
+        defending_dino = dino
+        robo_weapon = robot.weapon
+        if defending_dino.health > 0 and attacking_robot.power_level >= 10:
+                print(f'{attacking_robot.name} attacks {defending_dino.name} using {robo_weapon} \nfor {attacking_robot.attack_power} Damage ')
+                defending_dino.health = defending_dino.health - (attacking_robot.attack_power / 2)
+                attacking_robot.power_level = attacking_robot.power_level - 10
+                defending_dino.energy += 10
+                if defending_dino.health <= 0:
+                    self.display_winner(robot, dino)
+                elif defending_dino.health > 0:
+                    self.dino_attack(dino, robot)
+        elif defending_dino.health > 0 and attacking_robot.power_level < 10:
+            print(f'{attacking_robot.name} was unable to attack while recharging. Power level currently at {attacking_robot.power_level} ')
+            attacking_robot.power_level += 10
 
         
     
-    def robo_attack(self, robot, dino):
-        pass
-    
     def display_winner(self, winner, loser):
-        print(f'{winner.name} beat {loser.name} using {winner.weapon} ')
-        if loser == self.dino_herd[0] or loser == self.dino_herd[1] or loser == self.dino_herd[2]:
-            self.dino_herd.remove[loser]
-        elif loser == self.robot_group[0] or loser == self.robot_group[1] or loser == self.robot_group[2]:
-            self.robot_group.remove[loser]
+        for dino in self.dino_herd:
+            if loser == dino:
+                self.dino_herd.remove[loser]
+                print(f'{winner.name} beat {loser.name} using {winner.weapon} ')
+        for robot in self.robot_group:
+            if loser == robot:
+                self.robot_group.remove[loser]
+                print(f'{winner.name} beat {loser.name} ')
