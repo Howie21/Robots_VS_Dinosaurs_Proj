@@ -12,4 +12,4 @@ class Fleet:
         mecha_godzilla = Robot("Mecha Godzilla", 200)
         titanium_samuri = Robot("Titanium Samuri", 150)
         jet = Robot('Jet', 100)
-        self.fleet_bots.extend(mecha_godzilla, titanium_samuri, jet)
+        self.fleet_bots.extend([mecha_godzilla, titanium_samuri, jet])
